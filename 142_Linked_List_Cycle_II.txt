@@ -1,0 +1,36 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+      // here we have to find where the loop starts from
+        ListNode slow = head;
+        ListNode fast = head;
+        // first we have to find the loop is existed or not 
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            //after finding loop again moving fast and slow to one step 
+            if(slow==fast){
+                // before moving one step asign head to slow;
+                slow=head;
+                // after moving one step each is they meet again then it is our starting loop point then return fast or slow
+                while(slow!=fast){
+                    slow=slow.next;
+                    fast=fast.next;
+                }
+                return slow;
+            }
+        }
+       // if no loop it retuns -1;
+       return null;
+    }
+}
